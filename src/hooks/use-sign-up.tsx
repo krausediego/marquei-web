@@ -40,7 +40,7 @@ export function useSignUp() {
     await auth.signUp.email(
       {
         ...values,
-        callbackURL: import.meta.env.VITE_FRONTEND_BASE_URL,
+        callbackURL: `${import.meta.env.VITE_FRONTEND_BASE_URL}/overview`,
       },
       {
         onError(context) {

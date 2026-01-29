@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { auth } from "@/lib/auth";
+import AdminPanelLayout from "@/components/admin-panel/admin-panel-layout";
 
 export const Route = createFileRoute("/_application")({
   beforeLoad: async () => {
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/_application")({
         id: session?.user.id,
         name: session?.user.name,
         image: session?.user.image,
+        email: session?.user.email,
       },
     };
   },
@@ -19,11 +21,18 @@ export const Route = createFileRoute("/_application")({
     }
     return {
       userId: context.user.id,
+      userName: context.user.name,
+      email: context.user.email,
+      avatar: context.user.image,
     };
   },
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <Outlet />;
+  return (
+    <AdminPanelLayout>
+      <Outlet />
+    </AdminPanelLayout>
+  );
 }

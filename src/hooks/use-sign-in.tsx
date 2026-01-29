@@ -44,6 +44,7 @@ export function useSignIn() {
     await auth.signIn.social(
       {
         provider: "google",
+        callbackURL: `${import.meta.env.VITE_FRONTEND_BASE_URL}/overview`,
       },
       {
         onError(context) {

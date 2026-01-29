@@ -1,5 +1,6 @@
 import { createAuthClient } from "better-auth/react";
 import { organizationClient } from "better-auth/client/plugins";
+import { stripeClient } from "@better-auth/stripe/client";
 
 export const auth = createAuthClient({
   baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
@@ -22,6 +23,9 @@ export const auth = createAuthClient({
           },
         },
       },
+    }),
+    stripeClient({
+      subscription: true,
     }),
   ],
 });

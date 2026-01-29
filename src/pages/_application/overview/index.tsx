@@ -1,3 +1,5 @@
+import { ContentLayout } from "@/components/admin-panel/content-layout";
+
 import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_application/overview/")({
@@ -7,5 +9,9 @@ export const Route = createFileRoute("/_application/overview/")({
 function RouteComponent() {
   const { userId } = useLoaderData({ from: "/_application" });
 
-  return <div>{userId}</div>;
+  return (
+    <ContentLayout title="Dashboard">
+      <div>{userId}</div>
+    </ContentLayout>
+  );
 }
