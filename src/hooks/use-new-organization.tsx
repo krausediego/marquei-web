@@ -1,16 +1,13 @@
-import { auth } from "@/lib/auth";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { auth } from "@/lib/auth";
 
 const newOrganizationSchema = z.object({
   name: z
-    .string({ error: "O nome da organização é obrigatório" })
-    .min(1, "O nome da organização é obrigatório"),
-  slug: z
-    .string({ error: "O slug é obrigatório" })
-    .min(1, "O slug é obrigatório"),
+    .string({ error: "O nome do estabelecimento é obrigatório" })
+    .min(1, "O nome do estabelecimento é obrigatório"),
   description: z
     .string({ error: "A descrição é obrigatória" })
     .min(1, "A descrição é obrigatória"),
@@ -18,6 +15,9 @@ const newOrganizationSchema = z.object({
     .string({ error: "O telefone é obrigatório" })
     .min(1, "O telefone é obrigatório"),
   number: z.number({ error: "O número é obrigatório" }),
+  postalCode: z
+    .string({ error: "O CEP é obrigatório" })
+    .min(1, "O CEP é obrigatório"),
   street: z
     .string({ error: "A rua é obrigatória" })
     .min(1, "A rua é obrigatória"),
@@ -30,13 +30,6 @@ const newOrganizationSchema = z.object({
   state: z
     .string({ error: "O estado é obrigatório" })
     .min(1, "O estado é obrigatório"),
-  location: z.object(
-    {
-      x: z.number({ error: "A coordenada X é obrigatória" }),
-      y: z.number({ error: "A coordenada Y é obrigatória" }),
-    },
-    { error: "A localização é obrigatória" },
-  ),
 });
 
 type NewOrganizationProps = z.infer<typeof newOrganizationSchema>;

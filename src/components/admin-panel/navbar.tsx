@@ -1,6 +1,6 @@
-import { ModeToggle } from "@/components/mode-toggle";
 import { UserNav } from "@/components/admin-panel/user-nav";
-
+import { ModeToggle } from "@/components/mode-toggle";
+import { Notifications } from "../notifications/notifications";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,7 +10,6 @@ import {
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import { SheetMenu } from "./sheet-menu";
-import { Notifications } from "../notifications/notifications";
 
 interface NavbarProps {
   title: string;
@@ -20,7 +19,7 @@ export function Navbar({ title }: NavbarProps) {
   return (
     <header className="sticky top-0 z-10 py-4 w-full bg-background backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="mx-4 sm:mx-8 flex h-14 items-center">
-        <div className="flex flex-row lg:flex-col items-center gap-4 lg:gap-0 space-y-0.5">
+        <div className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-0 space-y-0.5">
           <SheetMenu />
           <p className="hidden lg:flex text-muted-foreground text-xs">
             <Breadcrumb>

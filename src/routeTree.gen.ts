@@ -13,7 +13,15 @@ import { Route as AuthLayoutRouteImport } from './pages/_auth/layout'
 import { Route as ApplicationLayoutRouteImport } from './pages/_application/layout'
 import { Route as AuthSignUpIndexRouteImport } from './pages/_auth/sign-up/index'
 import { Route as AuthSignInIndexRouteImport } from './pages/_auth/sign-in/index'
+import { Route as ApplicationUsersIndexRouteImport } from './pages/_application/users/index'
+import { Route as ApplicationServicesIndexRouteImport } from './pages/_application/services/index'
+import { Route as ApplicationScheduleIndexRouteImport } from './pages/_application/schedule/index'
+import { Route as ApplicationReviewsIndexRouteImport } from './pages/_application/reviews/index'
+import { Route as ApplicationProfessionalsIndexRouteImport } from './pages/_application/professionals/index'
+import { Route as ApplicationProductsIndexRouteImport } from './pages/_application/products/index'
 import { Route as ApplicationOverviewIndexRouteImport } from './pages/_application/overview/index'
+import { Route as ApplicationClientsIndexRouteImport } from './pages/_application/clients/index'
+import { Route as ApplicationBookingsIndexRouteImport } from './pages/_application/bookings/index'
 
 const AuthLayoutRoute = AuthLayoutRouteImport.update({
   id: '/_auth',
@@ -33,22 +41,83 @@ const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
   path: '/sign-in/',
   getParentRoute: () => AuthLayoutRoute,
 } as any)
+const ApplicationUsersIndexRoute = ApplicationUsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => ApplicationLayoutRoute,
+} as any)
+const ApplicationServicesIndexRoute =
+  ApplicationServicesIndexRouteImport.update({
+    id: '/services/',
+    path: '/services/',
+    getParentRoute: () => ApplicationLayoutRoute,
+  } as any)
+const ApplicationScheduleIndexRoute =
+  ApplicationScheduleIndexRouteImport.update({
+    id: '/schedule/',
+    path: '/schedule/',
+    getParentRoute: () => ApplicationLayoutRoute,
+  } as any)
+const ApplicationReviewsIndexRoute = ApplicationReviewsIndexRouteImport.update({
+  id: '/reviews/',
+  path: '/reviews/',
+  getParentRoute: () => ApplicationLayoutRoute,
+} as any)
+const ApplicationProfessionalsIndexRoute =
+  ApplicationProfessionalsIndexRouteImport.update({
+    id: '/professionals/',
+    path: '/professionals/',
+    getParentRoute: () => ApplicationLayoutRoute,
+  } as any)
+const ApplicationProductsIndexRoute =
+  ApplicationProductsIndexRouteImport.update({
+    id: '/products/',
+    path: '/products/',
+    getParentRoute: () => ApplicationLayoutRoute,
+  } as any)
 const ApplicationOverviewIndexRoute =
   ApplicationOverviewIndexRouteImport.update({
     id: '/overview/',
     path: '/overview/',
     getParentRoute: () => ApplicationLayoutRoute,
   } as any)
+const ApplicationClientsIndexRoute = ApplicationClientsIndexRouteImport.update({
+  id: '/clients/',
+  path: '/clients/',
+  getParentRoute: () => ApplicationLayoutRoute,
+} as any)
+const ApplicationBookingsIndexRoute =
+  ApplicationBookingsIndexRouteImport.update({
+    id: '/bookings/',
+    path: '/bookings/',
+    getParentRoute: () => ApplicationLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthLayoutRouteWithChildren
+  '/bookings/': typeof ApplicationBookingsIndexRoute
+  '/clients/': typeof ApplicationClientsIndexRoute
   '/overview/': typeof ApplicationOverviewIndexRoute
+  '/products/': typeof ApplicationProductsIndexRoute
+  '/professionals/': typeof ApplicationProfessionalsIndexRoute
+  '/reviews/': typeof ApplicationReviewsIndexRoute
+  '/schedule/': typeof ApplicationScheduleIndexRoute
+  '/services/': typeof ApplicationServicesIndexRoute
+  '/users/': typeof ApplicationUsersIndexRoute
   '/sign-in/': typeof AuthSignInIndexRoute
   '/sign-up/': typeof AuthSignUpIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthLayoutRouteWithChildren
+  '/bookings': typeof ApplicationBookingsIndexRoute
+  '/clients': typeof ApplicationClientsIndexRoute
   '/overview': typeof ApplicationOverviewIndexRoute
+  '/products': typeof ApplicationProductsIndexRoute
+  '/professionals': typeof ApplicationProfessionalsIndexRoute
+  '/reviews': typeof ApplicationReviewsIndexRoute
+  '/schedule': typeof ApplicationScheduleIndexRoute
+  '/services': typeof ApplicationServicesIndexRoute
+  '/users': typeof ApplicationUsersIndexRoute
   '/sign-in': typeof AuthSignInIndexRoute
   '/sign-up': typeof AuthSignUpIndexRoute
 }
@@ -56,20 +125,60 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_application': typeof ApplicationLayoutRouteWithChildren
   '/_auth': typeof AuthLayoutRouteWithChildren
+  '/_application/bookings/': typeof ApplicationBookingsIndexRoute
+  '/_application/clients/': typeof ApplicationClientsIndexRoute
   '/_application/overview/': typeof ApplicationOverviewIndexRoute
+  '/_application/products/': typeof ApplicationProductsIndexRoute
+  '/_application/professionals/': typeof ApplicationProfessionalsIndexRoute
+  '/_application/reviews/': typeof ApplicationReviewsIndexRoute
+  '/_application/schedule/': typeof ApplicationScheduleIndexRoute
+  '/_application/services/': typeof ApplicationServicesIndexRoute
+  '/_application/users/': typeof ApplicationUsersIndexRoute
   '/_auth/sign-in/': typeof AuthSignInIndexRoute
   '/_auth/sign-up/': typeof AuthSignUpIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/overview/' | '/sign-in/' | '/sign-up/'
+  fullPaths:
+    | '/'
+    | '/bookings/'
+    | '/clients/'
+    | '/overview/'
+    | '/products/'
+    | '/professionals/'
+    | '/reviews/'
+    | '/schedule/'
+    | '/services/'
+    | '/users/'
+    | '/sign-in/'
+    | '/sign-up/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/overview' | '/sign-in' | '/sign-up'
+  to:
+    | '/'
+    | '/bookings'
+    | '/clients'
+    | '/overview'
+    | '/products'
+    | '/professionals'
+    | '/reviews'
+    | '/schedule'
+    | '/services'
+    | '/users'
+    | '/sign-in'
+    | '/sign-up'
   id:
     | '__root__'
     | '/_application'
     | '/_auth'
+    | '/_application/bookings/'
+    | '/_application/clients/'
     | '/_application/overview/'
+    | '/_application/products/'
+    | '/_application/professionals/'
+    | '/_application/reviews/'
+    | '/_application/schedule/'
+    | '/_application/services/'
+    | '/_application/users/'
     | '/_auth/sign-in/'
     | '/_auth/sign-up/'
   fileRoutesById: FileRoutesById
@@ -109,6 +218,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignInIndexRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
+    '/_application/users/': {
+      id: '/_application/users/'
+      path: '/users'
+      fullPath: '/users/'
+      preLoaderRoute: typeof ApplicationUsersIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/services/': {
+      id: '/_application/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ApplicationServicesIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/schedule/': {
+      id: '/_application/schedule/'
+      path: '/schedule'
+      fullPath: '/schedule/'
+      preLoaderRoute: typeof ApplicationScheduleIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/reviews/': {
+      id: '/_application/reviews/'
+      path: '/reviews'
+      fullPath: '/reviews/'
+      preLoaderRoute: typeof ApplicationReviewsIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/professionals/': {
+      id: '/_application/professionals/'
+      path: '/professionals'
+      fullPath: '/professionals/'
+      preLoaderRoute: typeof ApplicationProfessionalsIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/products/': {
+      id: '/_application/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ApplicationProductsIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
     '/_application/overview/': {
       id: '/_application/overview/'
       path: '/overview'
@@ -116,15 +267,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplicationOverviewIndexRouteImport
       parentRoute: typeof ApplicationLayoutRoute
     }
+    '/_application/clients/': {
+      id: '/_application/clients/'
+      path: '/clients'
+      fullPath: '/clients/'
+      preLoaderRoute: typeof ApplicationClientsIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
+    '/_application/bookings/': {
+      id: '/_application/bookings/'
+      path: '/bookings'
+      fullPath: '/bookings/'
+      preLoaderRoute: typeof ApplicationBookingsIndexRouteImport
+      parentRoute: typeof ApplicationLayoutRoute
+    }
   }
 }
 
 interface ApplicationLayoutRouteChildren {
+  ApplicationBookingsIndexRoute: typeof ApplicationBookingsIndexRoute
+  ApplicationClientsIndexRoute: typeof ApplicationClientsIndexRoute
   ApplicationOverviewIndexRoute: typeof ApplicationOverviewIndexRoute
+  ApplicationProductsIndexRoute: typeof ApplicationProductsIndexRoute
+  ApplicationProfessionalsIndexRoute: typeof ApplicationProfessionalsIndexRoute
+  ApplicationReviewsIndexRoute: typeof ApplicationReviewsIndexRoute
+  ApplicationScheduleIndexRoute: typeof ApplicationScheduleIndexRoute
+  ApplicationServicesIndexRoute: typeof ApplicationServicesIndexRoute
+  ApplicationUsersIndexRoute: typeof ApplicationUsersIndexRoute
 }
 
 const ApplicationLayoutRouteChildren: ApplicationLayoutRouteChildren = {
+  ApplicationBookingsIndexRoute: ApplicationBookingsIndexRoute,
+  ApplicationClientsIndexRoute: ApplicationClientsIndexRoute,
   ApplicationOverviewIndexRoute: ApplicationOverviewIndexRoute,
+  ApplicationProductsIndexRoute: ApplicationProductsIndexRoute,
+  ApplicationProfessionalsIndexRoute: ApplicationProfessionalsIndexRoute,
+  ApplicationReviewsIndexRoute: ApplicationReviewsIndexRoute,
+  ApplicationScheduleIndexRoute: ApplicationScheduleIndexRoute,
+  ApplicationServicesIndexRoute: ApplicationServicesIndexRoute,
+  ApplicationUsersIndexRoute: ApplicationUsersIndexRoute,
 }
 
 const ApplicationLayoutRouteWithChildren =

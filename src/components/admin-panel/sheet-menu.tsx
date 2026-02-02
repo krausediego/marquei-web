@@ -1,13 +1,13 @@
-import { MenuIcon, PanelsTopLeft, Scissors } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { MenuIcon, Scissors } from "lucide-react";
 import { Menu } from "@/components/admin-panel/menu";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
-  SheetHeader,
   SheetContent,
+  SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Separator } from "../ui/separator";
 
 export function SheetMenu() {
   return (
@@ -18,7 +18,7 @@ export function SheetMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent className="sm:w-72 px-3 h-full flex flex-col" side="left">
-        <SheetHeader>
+        <SheetHeader className="flex items-center">
           <div className="flex items-center gap-4">
             <div className="bg-foreground size-12 rounded-md items-center justify-center flex">
               <Scissors
@@ -29,6 +29,7 @@ export function SheetMenu() {
             </div>
             <p className="text-foreground font-semibold text-2xl">Marquei</p>
           </div>
+          <Separator />
         </SheetHeader>
         <Menu isOpen />
       </SheetContent>

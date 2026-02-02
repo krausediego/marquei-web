@@ -1,15 +1,9 @@
 "use client";
 
+import { Link } from "@tanstack/react-router";
 import { LayoutGrid, LogOut, User } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,10 +13,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link, useLoaderData } from "@tanstack/react-router";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useSession } from "@/hooks/use-auth-query";
 
 export function UserNav() {
-  const { avatar, userName, email } = useLoaderData({ from: "/_application" });
+  const { data: session } = useSession();
 
   return (
     <DropdownMenu>
@@ -35,7 +35,7 @@ export function UserNav() {
                 className="relative size-10 rounded-full"
               >
                 <Avatar>
-                  <AvatarImage src={avatar ?? ""} alt="Avatar" />
+                  <AvatarImage src={session?.user?.image ?? ""} alt="Avatar" />
                   <AvatarFallback className="bg-transparent">JD</AvatarFallback>
                 </Avatar>
               </Button>
@@ -48,9 +48,11 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{userName}</p>
+            <p className="text-sm font-medium leading-none">
+              {session?.user?.name}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {email}
+              {session?.user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
